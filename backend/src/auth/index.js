@@ -1,6 +1,5 @@
 exports.authHandler = async (event) => {
   const token = event.headers.authorization;
-
   const expectedUsername = process.env.AUTH_USERNAME;
   const expectedPassword = process.env.AUTH_PASSWORD;
 
@@ -23,9 +22,10 @@ function decodeAuthToken(token) {
   }
 
   const base64Credentials = token.split(' ')[1];
-  const credentials = Buffer.from(base64Credentials, 'base64').toString(
-    'ascii',
-  );
+  const credentials = Buffer.from(
+    base64Credentials,
+    'base64'
+  ).toString('ascii');
   const [username, password] = credentials.split(':');
   return {username, password};
 }
